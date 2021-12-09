@@ -1,0 +1,55 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件处理4</title>
+    <!-- <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script> -->
+    <script src="./node_modules/react/umd/react.development.js"></script>
+    <script src="./node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <style>
+        .red{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+         //标准组件,带状态,有生命周期,this代表React.Component
+         class Hello extends React.Component{
+            //初始化阶段，初始化props state
+            constructor(props){
+             console.log('初始化阶段')
+             //初始化属性 Hello组件里面的属性 jack 29
+             super(props);//把props传递给父级对象
+             //组件内部所用的变量值叫状态，初始化状态
+             this.state={
+                 name:'jack',
+                 age:30
+             }
+            }
+            updateUser(){
+                this.setState({
+                    name:'Tim',
+                    age:32
+                })
+            }
+            render(){
+                console.log("组件加载或数据更新")
+                return <div>
+                <h1>Hello {this.state.name}</h1>
+                <p>年龄:{this.state.age}</p>
+                <p>擅长：java</p>
+                <button onClick={this.updateUser.bind(this)}>更新数据</button>
+                </div>
+            }
+
+         }
+        ReactDOM.render(<Hello/>,document.getElementById('app'))  
+       
+     </script>
+</body>
+</html>

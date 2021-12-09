@@ -1,0 +1,67 @@
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>表单应用</title>
+        <!-- <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script> -->
+        <script src="./node_modules/react/umd/react.development.js"></script>
+        <script src="./node_modules/react-dom/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        <style>
+            .red{
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app"></div>
+        <script type="text/babel">
+             //标准组件,带状态,有生命周期,this代表React.Component
+             class TodoList extends React.Component{
+                state={
+                    val:'',
+                    list:[]
+                }
+                handleAdd=()=>{
+                // const val=this.state.val
+                // const list=this.state.list
+                //解构语法，相当于上边两句
+                const {val,list}=this.state
+                list.push(val)
+                //在react项目中，凡是数据发生变化，一定记得setstate进行更改
+                this.setState({
+                    list:list
+                })
+                }    
+                hadleInput=(event)=>{
+                 this.setState({
+                     val:event.target.value
+                 })
+                }     
+                render(){
+                //文本框的值
+                const val=this.state.value;
+                //获取这个list对象
+                const arr=this.state.list
+                const listItem=[]
+                arr.map((item,index)=>{
+                    let li =<li key={index}>{item}</li>
+                    listItem.push(li)
+                })            
+                    return <div>
+                    <div><input type="text" value={val} onChange={this.hadleInput}/>
+                         <button onClick={this.handleAdd}>添加</button>
+                        </div>
+                    <ul>{listItem}</ul>
+                    </div>
+                }
+    
+             }
+            ReactDOM.render(<TodoList/>,document.getElementById('app'))  
+           
+         </script>
+    </body>
+    </html>
